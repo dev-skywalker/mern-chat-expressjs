@@ -11,14 +11,10 @@ const app = express()
 /***socket connection */
 const server = http.createServer(app)
 const io = new Server(server, {
-    transports: ['websocket'],
     cors: {
-        origin: "https://react-redux-chat-khaki.vercel.app",
-        methods: ["GET", "POST"],
-        transports: ['websocket', 'polling'],
+        origin: process.env.FRONTEND_URL,
         credentials: true
-    },
-    allowEIO3: true
+    }
 })
 
 /***
