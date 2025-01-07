@@ -3,7 +3,15 @@ const UserModel = require("../models/UserModel")
 
 async function updateUserDetails(request, response) {
     try {
-        const token = request.cookies.token || ""
+        const authHeader = request.headers.authorization;
+        const token = authHeader && authHeader.split(" ")[1];
+
+        if (!token) {
+            return response.status(400).json({
+                message: "No token provided",
+                error: true,
+            });
+        }
 
         const user = await getUserDetailsFromToken(token)
 
