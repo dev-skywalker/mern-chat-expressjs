@@ -13,8 +13,11 @@ const server = http.createServer(app)
 const io = new Server(server, {
     cors: {
         origin: "https://react-redux-chat-khaki.vercel.app",
+        methods: ["GET", "POST"],
+        transports: ['websocket', 'polling'],
         credentials: true
-    }
+    },
+    allowEIO3: true
 })
 
 /***
